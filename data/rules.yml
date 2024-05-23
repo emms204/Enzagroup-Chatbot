@@ -1,0 +1,131 @@
+version: "3.1"
+
+rules:
+
+  - rule: Goodbye User
+    steps:
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - rule: Bot challenge
+    steps:
+      - intent: bot_challenge
+      - action: utter_iamabot
+      
+  - rule: activate signup form
+    steps:
+      - action: signup_form
+      - active_loop: signup_form
+
+  - rule: submit signup form
+    condition:
+    - active_loop: signup_form
+    steps:
+      - action: signup_form
+      - active_loop: null
+      - action: action_submit_form
+      - action: utter_slots_values
+      - action: utter_choose_partnership
+
+  - rule: Direct Partnership Documents Response
+    steps:
+    - intent: partnership
+    - action: utter_partnership_documents
+
+
+  - rule: User affirms after partnership documents
+    steps:
+      - action: utter_partnership_documents
+      - intent: affirm
+      - action: action_partnership_form
+      - action: utter_submit
+
+  - rule: activate payment facilitator form
+    condition:
+    - slot_was_set:
+      - partnership_type: "payment_facilitator"
+    steps:
+      - action: payment_facilitator_form
+      - active_loop: payment_facilitator_form
+      
+  - rule: submit payment facilitator form
+    condition:
+    - active_loop: payment_facilitator_form
+    steps:
+      - action: payment_facilitator_form
+      - active_loop: null
+      - action: utter_submit
+      
+  - rule: activate iso-m form
+    condition:
+    - slot_was_set:
+      - partnership_type: "iso-m"
+    steps:
+      - action: iso_m_form
+      - active_loop: iso_m_form
+      
+  - rule: submit iso-m form
+    condition:
+    - active_loop: iso_m_form
+    steps:
+      - action: iso_m_form
+      - active_loop: null
+      - action: utter_submit
+      
+  - rule: activate direct merchant form
+    condition:
+    
+    - slot_was_set:
+      - partnership_type: "direct_merchant"
+    steps:
+      - action: direct_merchant_form
+      - active_loop: direct_merchant_form
+      
+  - rule: submit direct merchant form
+    condition:
+    - active_loop: direct_merchant_form
+    steps:
+      - action: direct_merchant_form
+      - active_loop: null
+      - action: utter_submit
+  
+  # - rule: handle form interruption
+  #   condition:
+  #   - active_loop: payment_facilitator_form
+  #   - active_loop: iso_m_form
+  #   - active_loop: direct_merchant_form
+  #   steps:
+  #     - intent: stop
+  #     - action: utter_ask_continue
+
+  - rule: activate shareholder details form
+    steps:
+      - intent: confirm_details
+      - action: shareholder_details_form
+      - active_loop: shareholder_details_form
+      
+  - rule: submit shareholder details form
+    condition:
+    - active_loop: shareholder_details_form
+    steps:
+      - action: shareholder_details_form
+      - active_loop: null
+      - action: action_validate_num_shareholders
+      - action: utter_add_shareholder
+      
+  - rule: user wants to add another shareholder
+    steps:
+      - intent: another_shareholder_affirm
+      - action: action_num_shareholders_form
+
+  - rule: user does not want to add another shareholder
+    steps:
+      - intent: another_shareholder_deny
+      - action: utter_choose_payment_channel
+
+  - rule: payment information
+    steps:
+      - action: utter_choose_payment_channel
+      - intent: paychannel
+      - action: utter_payment_channel_selection
+      - action: action_restart

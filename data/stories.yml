@@ -1,0 +1,199 @@
+version: "3.1"
+
+stories:
+
+  - story: User Hesitation
+    steps:
+      - intent: greet
+      - action: utter_welcome_message 
+      - intent: stop
+      - action: utter_ask_continue
+      - intent: deny
+      - action: utter_goodbye
+      - action: action_restart
+
+  - story: User Hesitation and Multiple Queries
+    steps:
+      - intent: greet
+      - action: utter_welcome_message 
+      - intent: stop
+      - action: utter_ask_continue
+      - intent: affirm
+      - action: signup_form
+      - active_loop: signup_form
+      - active_loop: null
+      - action: action_submit_form
+      - action: utter_slots_values
+      - action: utter_choose_partnership
+      - intent: partnership
+      - action: utter_partnership_documents
+      - intent: stop
+      - action: utter_ask_continue
+      - intent: affirm
+      - action: utter_partnership_documents
+      - intent: affirm
+      - action: action_partnership_form
+      - action: utter_submit
+      - or:
+        - intent: affirm
+        - intent: confirm_details
+      - action: shareholder_details_form
+      - active_loop: shareholder_details_form
+      - active_loop: null
+      - action: action_validate_num_shareholders
+      - action: utter_add_shareholder
+
+  - story: standard onboarding path
+    steps:
+      - intent: greet
+      - action: utter_welcome_message 
+      - intent: affirm
+      - action: signup_form
+      - active_loop: signup_form
+      - active_loop: null
+      - action: action_submit_form
+      - action: utter_slots_values
+      - action: utter_choose_partnership
+      - intent: partnership
+      - action: utter_partnership_documents
+      - intent: affirm
+      - action: action_partnership_form
+      - action: utter_submit
+      - or:
+        - intent: affirm
+        - intent: confirm_details
+      - action: shareholder_details_form
+      - active_loop: shareholder_details_form
+      - active_loop: null
+      - action: action_validate_num_shareholders
+      - action: utter_add_shareholder
+
+  - story: interruptions with questions one
+    steps:
+      - intent: greet
+      - action: utter_welcome_message 
+      - intent: affirm
+      - action: signup_form
+      - active_loop: signup_form
+      - active_loop: null
+      - action: action_submit_form
+      - action: utter_slots_values
+      - action: utter_choose_partnership
+      - intent: partnership
+      - action: utter_partnership_documents
+      - intent: stop
+      - action: utter_ask_continue
+      - intent: deny
+      - action: utter_goodbye
+      - action: action_restart
+
+  - story: interruptions with questions continue
+    steps:
+      - intent: greet
+      - action: utter_welcome_message 
+      - intent: affirm
+      - action: signup_form
+      - active_loop: signup_form
+      - active_loop: null
+      - action: action_submit_form
+      - action: utter_slots_values
+      - action: utter_choose_partnership
+      - intent: partnership
+      - action: utter_partnership_documents
+      - intent: stop
+      - action: utter_ask_continue
+      - intent: affirm
+      - action: utter_partnership_documents
+      - intent: affirm
+      - action: action_partnership_form
+      - action: utter_submit
+      - or:
+        - intent: affirm
+        - intent: confirm_details
+      - action: shareholder_details_form
+      - active_loop: shareholder_details_form
+      - active_loop: null
+      - action: action_validate_num_shareholders
+      - action: utter_add_shareholder
+
+  - story: interruptions with questions continue two
+    steps:
+      - intent: greet
+      - action: utter_welcome_message 
+      - intent: affirm
+      - action: signup_form
+      - active_loop: signup_form
+      - intent: stop
+      - action: utter_ask_continue
+      - intent: affirm
+      - active_loop: signup_form
+      - active_loop: null
+      - action: action_submit_form
+      - action: utter_slots_values
+      - action: utter_choose_partnership
+      - intent: partnership
+      - action: utter_partnership_documents
+      - intent: stop
+      - action: utter_ask_continue
+      - intent: affirm
+      - action: utter_partnership_documents
+      - intent: affirm
+      - action: action_partnership_form
+      - action: utter_submit
+      - or:
+        - intent: affirm
+        - intent: confirm_details
+      - action: shareholder_details_form
+      - active_loop: shareholder_details_form
+      - intent: stop
+      - action: utter_ask_continue
+      - intent: affirm
+      - active_loop: shareholder_details_form
+      - active_loop: null
+      - action: action_validate_num_shareholders
+      - action: utter_add_shareholder
+
+  - story: interruptions with questions continue three
+    steps:
+      - intent: greet
+      - action: utter_welcome_message 
+      - intent: affirm
+      - action: signup_form
+      - active_loop: signup_form
+      - intent: chitchat
+      - action: utter_chitchat
+      - active_loop: signup_form
+      - active_loop: null
+      - action: action_submit_form
+      - action: utter_slots_values
+      - action: utter_choose_partnership
+      - intent: partnership
+      - action: utter_partnership_documents
+      - intent: stop
+      - action: utter_ask_continue
+      - intent: affirm
+      - action: utter_partnership_documents
+      - intent: affirm
+      - action: action_partnership_form
+      - action: utter_submit
+      - or:
+        - intent: affirm
+        - intent: confirm_details
+      - action: shareholder_details_form
+      - active_loop: shareholder_details_form
+      - intent: chitchat
+      - action: utter_chitchat
+      - active_loop: shareholder_details_form
+      - active_loop: null
+      - action: action_validate_num_shareholders
+      - action: utter_add_shareholder
+      
+  - story: no more shareholder
+    steps:
+      - intent: another_shareholder_deny
+      - action: utter_choose_payment_channel
+      - intent: paychannel
+      - action: utter_payment_channel_selection
+      - action: action_restart
+
+      

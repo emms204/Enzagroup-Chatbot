@@ -1,0 +1,495 @@
+version: "3.1"
+
+intents:
+  - chitchat:
+      use_entities: []
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - bot_challenge
+  - inform
+  - stop
+  - partnership
+  - business_line
+  - confirm_details
+  - another_shareholder_affirm
+  - another_shareholder_deny
+  - paychannel
+
+entities:
+  - email
+  - partnership_type
+  - payment_channel
+  - line_of_business
+  
+slots:
+  email:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: email
+        intent: inform
+   
+  password:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+        - active_loop: signup_form
+          requested_slot: password
+    
+  logged_in:
+    type: bool
+    influence_conversation: false
+    mappings:
+      - type: custom
+      
+  partnership_type:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: partnership_type
+        intent: partnership
+        
+  merchant_name:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: payment_facilitator_form
+            requested_slot: merchant_name
+          - active_loop: iso_m_form
+            requested_slot: merchant_name
+          - active_loop: direct_merchant_form
+            requested_slot: merchant_name
+      
+  cac_documents:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: payment_facilitator_form
+            requested_slot: cac_documents
+          - active_loop: iso_m_form
+            requested_slot: cac_documents
+          - active_loop: direct_merchant_form
+            requested_slot: cac_documents
+  
+  cbn_license:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: payment_facilitator_form
+            requested_slot: cbn_license
+   
+  pci_dss_certificate:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: payment_facilitator_form
+            requested_slot: pci_dss_certificate
+      
+  line_of_business:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: line_of_business
+        intent: business_line
+        conditions:
+          - active_loop: payment_facilitator_form
+            requested_slot: line_of_business
+          - active_loop: iso_m_form
+            requested_slot: line_of_business
+          - active_loop: direct_merchant_form
+            requested_slot: line_of_business
+      
+  business_projection:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: payment_facilitator_form
+            requested_slot: business_projection
+          - active_loop: iso_m_form
+            requested_slot: business_projection
+          - active_loop: direct_merchant_form
+            requested_slot: business_projection
+      
+  merchant_website:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: payment_facilitator_form
+            requested_slot: merchant_website
+          - active_loop: iso_m_form
+            requested_slot: merchant_website
+          - active_loop: direct_merchant_form
+            requested_slot: merchant_website
+      
+  aml_policy:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: payment_facilitator_form
+            requested_slot: aml_policy
+          - active_loop: iso_m_form
+            requested_slot: aml_policy
+      
+  wema_amf_policy:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: payment_facilitator_form
+            requested_slot: wema_amf_policy
+            
+  name:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: shareholder_details_form
+            requested_slot: name
+
+  address:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: shareholder_details_form
+            requested_slot: address
+
+  bvn:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: shareholder_details_form
+            requested_slot: bvn
+
+  phone_no:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: shareholder_details_form
+            requested_slot: phone_no
+
+  valid_id:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: shareholder_details_form
+            requested_slot: valid_id
+  
+  num_shareholders:
+    type: float
+    min_value: 1.0
+    max_value: 10.0
+    initial_value: 1.0
+    mappings:
+      - type: custom
+
+  is_valid_num_shareholders:
+    type: bool
+    initial_value: false
+    mappings:
+      - type: custom
+      
+  payment_channel:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: payment_channel
+        intent: paychannel
+    
+responses:
+  utter_welcome_message:
+    - text: "Welcome! Let's get started with your merchant onboarding. Are you ready?"
+  
+  utter_ask_signup_form_email:
+    - text: "Please, Provide your Email?"
+  
+  utter_ask_signup_form_password:
+    - text: "Please, Provide your Password?"
+    
+  utter_ask_payment_facilitator_form_merchant_name:
+    - text: "What is the merchant name?"
+      
+  utter_ask_shareholder_details_form_name:
+    - text: "What is the Shareholder's Name?"
+    
+  utter_ask_shareholder_details_form_address:
+    - text: "What is the Shareholder's Address?"
+    
+  utter_ask_shareholder_details_form_bvn:
+    - text: "What is the Shareholder's BVN?"
+    
+  utter_ask_shareholder_details_form_phone_no:
+    - text: "What is the Shareholder's Phone Number?"
+    
+  utter_ask_shareholder_details_form_valid_id:
+    - text: |
+        Please upload the Shareholder Valid ID
+
+  utter_add_shareholder:
+    - text: "Do you want to add another shareholder?"
+        
+  utter_ask_payment_facilitator_form_cac_documents:
+    - text: |
+        Please upload your CAC Documents
+  
+  utter_ask_payment_facilitator_form_cbn_license:
+    - text: |
+        Please upload your CBN License
+    
+  utter_ask_payment_facilitator_form_pci_dss_certificate:
+    - text: |
+        Please upload your PCIDSS Certificate
+
+  utter_ask_payment_facilitator_form_line_of_business:
+    - text: "Please select your line of business"
+      buttons:
+      - title: "Retail Sales"
+        payload: '/business_line{{"line_of_business":"Retail Sales"}}'
+
+      - title: "Software Development"
+        payload: '/business_line{{"line_of_business":"Software Development"}}'
+
+      - title: "Food Services"
+        payload: '/business_line{{"line_of_business":"Food Services"}}'
+    
+  utter_ask_payment_facilitator_form_business_projection:
+    - text: |
+        Please upload your 12 months business projection
+    
+    
+  utter_ask_payment_facilitator_form_merchant_website:
+    - text: "Please provide your merchant URL/Website"
+    
+  utter_ask_payment_facilitator_form_aml_policy:
+    - text: |
+        Please upload your AML policy
+    
+  utter_ask_payment_facilitator_form_wema_amf_policy:
+    - text: |
+        Please upload your WEMA AMF/CFT policy
+  
+  utter_ask_iso_m_form_merchant_name:
+    - text: "What is the merchant name?"
+      
+  utter_ask_iso_m_form_cac_documents:
+    - text: |
+        Please upload your CAC Documents
+    
+  utter_ask_iso_m_form_line_of_business:
+    - text: "Please select your line of business"
+      buttons:
+      - title: "Retail Sales"
+        payload: '/business_line{{"line_of_business":"Retail Sales"}}'
+
+      - title: "Software Development"
+        payload: '/business_line{{"line_of_business":"Software Development"}}'
+
+      - title: "Food Services"
+        payload: '/business_line{{"line_of_business":"Food Services"}}'
+    
+  utter_ask_iso_m_form_business_projection:
+    - text: |
+        Please upload your 12 months business projection
+    
+  utter_ask_iso_m_form_merchant_website:
+    - text: "Please provide your merchant URL/Website"
+    
+  utter_ask_iso_m_form_aml_policy:
+    - text: | 
+        Please upload your AML policy 
+
+  utter_ask_direct_merchant_form_merchant_name:
+    - text: "What is the merchant name?"
+      
+  utter_ask_direct_merchant_form_cac_documents:
+    - text: |
+        Please upload your CAC Documents
+
+  utter_ask_direct_merchant_form_line_of_business:
+    - text: "Please select your line of business"
+      buttons:
+      - title: "Retail Sales"
+        payload: '/business_line{{"line_of_business":"Retail Sales"}}'
+
+      - title: "Software Development"
+        payload: '/business_line{{"line_of_business":"Software Development"}}'
+
+      - title: "Food Services"
+        payload: '/business_line{{"line_of_business":"Food Services"}}'
+      
+    
+  utter_ask_direct_merchant_form_business_projection:
+    - text: |
+        Please upload your 12 months business projection 
+
+  utter_ask_direct_merchant_form_merchant_website:
+    - text: "Please provide your merchant URL/Website"
+    
+  utter_submit:
+    - text: "Thank you. Can you please provide details of shareholder owning more than 5%?"
+  
+  utter_slots_values:
+    - text: "You are logged in using the following parameters:\n - email: {email}\n - password: {password}\n"
+             
+  utter_chitchat:
+    - text: "What do you want to chat about?"
+    
+  utter_ask_continue:
+    - text: "Do you want to continue?"
+    
+  utter_choose_partnership:
+    - condition:
+        - type: slot
+          name: logged_in
+          value: true
+      text: "Please select your partnership type. You can choose between Payment Facilitator, ISO-M, or Direct Merchant."
+      
+      buttons: 
+      - title: "Payment Facilitator"
+        payload: '/partnership{{"partnership_type":"payment_facilitator"}}'
+        
+      - title: "ISO-M"
+        payload: '/partnership{{"partnership_type":"iso-m"}}'
+        
+      - title: "Direct Merchant"
+        payload: '/partnership{{"partnership_type":"direct_merchant"}}'
+      
+    - text: "You need to be Logged In, before you can Proceed."
+    
+  utter_choose_payment_channel:
+    - condition:
+        - type: slot
+          name: is_valid_num_shareholders
+          value: true
+      text: |
+        Please select your Payment Channel. You can choose between Local Transfer, International Transfer, NQR and NIP Transfer.
+      
+      buttons: 
+      - title: "Local Transfer"
+        payload: '/paychannel{{"payment_channel":"Local Transfer"}}'
+        
+      - title: "International Transfer"
+        payload: '/paychannel{{"payment_channel":"International Transfer"}}'
+        
+      - title: "NQR"
+        payload: '/paychannel{{"payment_channel":"NQR"}}'
+      
+      - title: "NIP Transfer"
+        payload: '/paychannel{{"payment_channel":"NIP Transfer"}}'
+      
+    - text: "You need to have provided Shareholder details, before you can Proceed."
+    
+  utter_partnership_documents:
+    - text: "You've chosen {partnership_type}. Are you ready to upload your business details?"
+    
+  utter_payment_channel_selection:
+    - text: "You've chosen {payment_channel}. This is the End of the Merchant Onboarding, Thank you."
+   
+  utter_default:
+    - text: "Sorry, I didn't understand you, please try to input something else"
+
+  utter_goodbye:
+    - text: "Okay, feel free to return when you're ready. Goodbye!"
+
+  utter_iamabot:
+    - text: "I am a bot, powered by Rasa."
+    
+actions:
+- validate_signup_form
+- action_submit_form
+- validate_payment_facilitator_form
+- validate_iso_m_form
+- validate_direct_merchant_form
+- validate_shareholder_details_form
+- action_num_shareholders_form
+- action_validate_num_shareholders
+- action_partnership_form
+
+forms:
+  signup_form:
+    ignored_intents:
+    - chitchat
+    required_slots:
+      - email
+      - password
+  
+  payment_facilitator_form:
+    ignored_intents:
+    - chitchat
+    required_slots:
+      - merchant_name
+      - cac_documents
+      - cbn_license
+      - pci_dss_certificate
+      - line_of_business
+      - business_projection
+      - merchant_website  
+      - aml_policy
+      - wema_amf_policy
+      
+  iso_m_form:
+    ignored_intents:
+    - chitchat
+    required_slots:
+      - merchant_name
+      - cac_documents
+      - line_of_business
+      - business_projection
+      - merchant_website  
+      - aml_policy
+      
+  direct_merchant_form:
+    ignored_intents:
+    - chitchat
+    required_slots:
+      - merchant_name
+      - cac_documents
+      - line_of_business
+      - business_projection
+      - merchant_website  
+      
+  shareholder_details_form:
+    ignored_intents:
+    - chitchat
+    required_slots:
+      - name
+      - address
+      - bvn
+      - phone_no
+      - valid_id
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+

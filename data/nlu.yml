@@ -1,0 +1,269 @@
+version: "3.1"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+    - okay
+    - Okay, start the upload
+    - Of course, I have the documents ready
+    - Let's upload now
+    - Yes, I'm ready to upload
+    - I have the documents ready
+    - Let's do this
+    - Ready to go
+    - I can upload now
+    - Sure, let's proceed
+    - Okay, I can upload the documents
+    - I'm ready to upload
+    - Start the upload
+    - Let's do the upload
+    - I am ready to provide the documents
+    - Let's proceed with the upload
+    
+- intent: confirm_details
+  examples: |
+    - Yes, I'm ready to provide the details.
+    - Sure, let's proceed with the details.
+    - Okay, I have the details ready.
+    - Yes, I can provide the shareholder details now.
+    - Alright, I'm ready to share the details.
+    - Yes, I am prepared to give the details.
+    - Sure, I have all the necessary information.
+    - Okay, I am ready to proceed.
+    - Yes, I can share the details of the shareholder.
+    - Alright, let's go ahead with the details.
+    - Yes, I have the shareholder details ready.
+    - Sure, I am ready to provide the information.
+    - Okay, I can share the details now.
+    - Yes, let's proceed with the shareholder details.
+    - Alright, I am ready to share the information.
+    - Yes, I am ready to give the details.
+    - Sure, I have the details of the shareholder.
+    - Okay, let's go ahead with the information.
+    - Yes, I am prepared to share the details.
+    - Alright, I have the necessary information ready.
+    - Yes, let's go ahead with the shareholder information.
+    - Sure, I am ready to proceed with the details.
+    - Okay, I am prepared to give the shareholder details.
+    - Yes, I can proceed with the information now.
+    - Alright, I am ready to provide the shareholder information.
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+    - No, I'm not ready yet
+    - I need more time
+    - Can we do this later?
+    - I don't have the documents right now
+    - Not ready to upload
+    - Let's wait
+    - I will upload later
+   
+
+- intent : another_shareholder_affirm
+  examples: |
+    - Yes, I want to add another shareholder.
+    - Sure, let's add one more shareholder.
+    - Yes, please.
+    - Absolutely, let's proceed with adding another shareholder.
+    - Yes, we have another shareholder to add.
+    - Indeed, there is another shareholder.
+    - Yes, let's do it.
+    - Yes, another shareholder needs to be added.
+    - Affirmative, proceed with the next shareholder.
+    - Yes, I would like to add another shareholder.
+    - Yes, there is one more shareholder to add.
+    - Yes, please proceed with adding another shareholder.
+    - Yes, we need to add another shareholder.
+    - Yes, let's continue with adding another shareholder.
+    - Yes, I have another shareholder to add.
+    
+- intent: another_shareholder_deny
+  examples: |
+    - No, I don't want to add another shareholder.
+    - No, that's all for now.
+    - No, we are done with adding shareholders.
+    - No, there are no more shareholders to add.
+    - No, let's proceed to the next step.
+    - No, that was the last shareholder.
+    - No, we can move on now.
+    - No, there are no more shareholders.
+    - No, let's not add another shareholder.
+    - No, we have added all the shareholders.
+    - No, we can proceed further.
+    - No, that's all the shareholders we have.
+    - No, we don't have any more shareholders to add.
+    - No, let's move on to the next action.
+    - No, we are done here.
+
+
+
+- intent: inform
+  examples: |
+    - [johndoe@example.com](email)
+    - [janedoe@sample.net](email)
+    - [thesmiths@ourfamily.org](email)
+    - [contact@mywebsite.info](email)
+    - [admin@techsupport.tech](email)
+    - [hello@travelblog.site](email)
+    - [service@localbusiness.store](email)
+    - [firstname.lastname@personal.co](email)
+    - [creative.designs@studio.art](email)
+    - [bookings@hotel.biz](email)
+    - [inquiries@eco-friendly.solar](email)
+    - [support@startup.inc](email)
+    - [newsletter@fashiontrends.style](email)
+    - [careers@corporatehub.jobs](email)
+    - [feedback@educationalplatform.edu](email)
+    - [reservations@luxuryresorts.vacations](email)
+    - [sales@electronics.market](email)
+    - [updates@gamingcommunity.games](email)
+    - [info@healthclinic.healthcare](email)
+    - [bookings@airlines.aero](email)
+    - [team@softwaredeveloper.dev](email)
+    - [contact@artgallery.gallery](email)
+    - [helpdesk@telecomprovider.tel](email)
+    - [order@organicgrocer.store](email)
+    - [subscribe@dailynews.media](email)
+    - [customer.service@financialadvisory.financial](email)
+    - [events@musicfestival.live](email)
+    - [office@lawfirm.legal](email)
+    - [projects@construction.company](email)
+    - [community@localsports.club](email)
+    
+- intent: partnership
+  examples: |
+    - [payment_facilitator](partnership_type)
+    - [iso-m](partnership_type)
+    - [direct_merchant](partnership_type)
+
+- intent: business_line
+  examples: |
+    - [Retail Sales](line_of_business)
+    - [Software Development](line_of_business)
+    - [Food Services](line_of_business)
+    - [Healthcare Services](line_of_business)
+    - [Financial Services](line_of_business)
+    - [Real Estate](line_of_business)
+    - [Marketing and Advertising](line_of_business)
+    - [Manufacturing](line_of_business)
+    - [Education and Training](line_of_business)
+    - [Transportation and Logistics](line_of_business)
+
+    
+- intent: paychannel
+  examples: |
+    - I allow Local Trans
+    - I allow Int'l Trans
+    - I allow NQR
+    - I allow NIP Transfer
+  
+- intent: chitchat
+  examples: |
+    - can you share your boss with me?
+    - i want to get to know your owner
+    - i want to know the company which designed you
+    - i want to know the company which generated you
+    - i want to know the company which invented you
+    - i want to know who invented you
+    - May I ask who invented you?
+    - please tell me the company who created you
+    - please tell me who created you
+    - tell me more about your creators
+    - tell me more about your founders
+    - Ahoy matey how are you?
+    - are you alright
+    - are you having a good day
+    - Are you ok?
+    - are you okay
+    - Do you feel good?
+    - how are things going
+    - how are things with you?
+    - How are things?
+    - how are you
+    - how are you doing
+    - how are you doing this morning
+    - how are you feeling
+    - how are you today
+    - How are you?
+    - How is the weather today?
+    - What's the weather like?
+    - How is the weather?
+    - What is the weather at your place?
+    - Do you have good weather?
+    - Is it raining?
+    - What's it like out there?
+    - Is it hot or cold?
+    - Beautiful day, isn't it?
+    - What's the weather forecast?
+    - Is it quite breezy outside?
+
+- intent: stop
+  examples: |
+    - ok then you cant help me
+    - that was shit, you're not helping
+    - you can't help me
+    - you can't help me with what i need
+    - i guess you can't help me then
+    - ok i guess you can't help me
+    - that's not what i want
+    - ok, but that doesnt help me
+    - this is leading to nothing
+    - this conversation is not really helpful
+    - you cannot help me with what I want
+    - I think you cant help me
+    - hm i don't think you can do what i want
+    - stop
+    - stop go back
+    - do you get anything?
+    - and you call yourself bot company? pff
+    - and that's it?
+    - nothing else?
+    
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
