@@ -59,7 +59,7 @@ RASA is an open-source machine learning framework for building conversational AI
    ```bash
    rasa train
    ```
-
+   
 ### Deploying Your RASA Chatbot
 
 0. **Run Custom Actions**:
@@ -73,9 +73,17 @@ RASA is an open-source machine learning framework for building conversational AI
      ```bash
      rasa shell
      ```
+2. **Debug the Model**:
+   Run the following command to debug the model predictions:
+   ```bash
+   rasa shell --debug
+   ```
 
-2. **Deployment**:
-    - You can launch the Index.html on a webserver to interact with the Chatbot
+3. **Deployment**:
+    - You can launch the Index.html on a webserver to interact with the Chatbot, start the chatbot locally to test the interactions:
+      ```bash
+      rasa run --enable-api --cors="*"
+      ```
     - For production, you can deploy your RASA chatbot on servers or platforms like RASA X, which provides tools for CI/CD, version control, and user testing.
 
 ### Tips for Effective Model Development
